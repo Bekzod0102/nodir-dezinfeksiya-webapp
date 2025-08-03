@@ -97,36 +97,15 @@ button:hover {
 <input type="tel" id="phone" required>
 
 <label id="label-pest" for="pest">Qaysi hasharot bezovta qilmoqda?</label>
-<select id="pest" required>
-  <option value="">-- Tanlang --</option>
-  <option value="Tarakanlar">Tarakanlar</option>
-  <option value="Kloplar">Kloplar</option>
-  <option value="Chumolilar">Chumolilar</option>
-  <option value="Chivinlar">Chivinlar</option>
-  <option value="Sichqonlar">Sichqonlar</option>
-  <option value="Boshqa">Boshqa</option>
-</select>
+<select id="pest" required></select>
 
 <label id="label-location" for="location">Qayerni dezinfeksiya qilish kerak?</label>
-<select id="location" required>
-  <option value="">-- Tanlang --</option>
-  <option value="Kvartira">Kvartira</option>
-  <option value="Uy">Uy</option>
-  <option value="Ofis">Ofis</option>
-  <option value="Ombor">Ombor</option>
-  <option value="Zavod">Zavod</option>
-  <option value="Boshqa">Boshqa</option>
-</select>
+<select id="location" required></select>
 
 <label id="label-time" for="time">Qachon qulay?</label>
-<select id="time" required>
-  <option value="">-- Tanlang --</option>
-  <option value="Bugun">Bugun</option>
-  <option value="Ertaga">Ertaga</option>
-  <option value="Farqi yo‘q">Farqi yo‘q</option>
-</select>
+<select id="time" required></select>
 
-<button type="submit">✅ Buyurtma berish</button>
+<button type="submit" id="submit-btn">✅ Buyurtma berish</button>
 
   </form>  <p id="status"></p>
 </div><script>
@@ -138,7 +117,10 @@ button:hover {
       pest: "Qaysi hasharot bezovta qilmoqda?",
       location: "Qayerni dezinfeksiya qilish kerak?",
       time: "Qachon qulay?",
-      submit: "✅ Buyurtma berish"
+      submit: "✅ Buyurtma berish",
+      pestOptions: ["-- Tanlang --", "Tarakanlar", "Kloplar", "Chumolilar", "Chivinlar", "Sichqonlar", "Boshqa"],
+      locationOptions: ["-- Tanlang --", "Kvartira", "Uy", "Ofis", "Ombor", "Zavod", "Boshqa"],
+      timeOptions: ["-- Tanlang --", "Bugun", "Ertaga", "Farqi yo‘q"]
     },
     ru: {
       title: "Оформить заявку",
@@ -147,25 +129,48 @@ button:hover {
       pest: "Какие насекомые вас беспокоят?",
       location: "Что нужно обработать?",
       time: "Когда удобно?",
-      submit: "✅ Отправить заявку"
+      submit: "✅ Отправить заявку",
+      pestOptions: ["-- Выберите --", "Тараканы", "Клопы", "Муравьи", "Мухи/комары", "Мыши/крысы", "Другое"],
+      locationOptions: ["-- Выберите --", "Квартира", "Дом", "Офис", "Склад", "Завод", "Другое"],
+      timeOptions: ["-- Выберите --", "Сегодня", "Завтра", "Не важно"]
     }
   };
 
   function setLang(lang) {
     const t = translations[lang];
+
     document.getElementById("form-title").innerText = t.title;
     document.getElementById("label-name").innerText = t.name;
     document.getElementById("label-phone").innerText = t.phone;
     document.getElementById("label-pest").innerText = t.pest;
     document.getElementById("label-location").innerText = t.location;
     document.getElementById("label-time").innerText = t.time;
-    document.querySelector("button[type='submit']").innerText = t.submit;
+    document.getElementById("submit-btn").innerText = t.submit;
+
+    // Select variantlarini yangilash
+    updateSelect("pest", t.pestOptions);
+    updateSelect("location", t.locationOptions);
+    updateSelect("time", t.timeOptions);
 
     document.querySelectorAll('.lang-select button').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`.lang-select button[onclick="setLang('${lang}')"]`).classList.add('active');
   }
 
-  const TOKEN ='8264569801:AAFHX7tVM9RVm0RVOL_TgwZ5h_OGszpIiGY';
+  function updateSelect(id, options) {
+    const select = document.getElementById(id);
+    select.innerHTML = "";
+    options.forEach(opt => {
+      const option = document.createElement("option");
+      option.value = opt;
+      option.textContent = opt;
+      select.appendChild(option);
+    });
+  }
+
+  // Boshlanishida tilni o'zbekcha qilib qo'yamiz
+  setLang('uz');
+
+  const TOKEN = '8264569801:AAFHX7tVM9RVm0RVOL_TgwZ5h_OGszpIiGY';
   const CHAT_ID = '@Saidov0102';
 
   document.getElementById('orderForm').addEventListener('submit', function(e) {
