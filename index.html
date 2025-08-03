@@ -83,7 +83,7 @@ button:hover {
   <div class="lang-select">
     <button onclick="setLang('uz')" class="active">O'zbekcha</button>
     <button onclick="setLang('ru')">Русский</button>
-  </div>  <h2 id="form-title">Zudlik bilan buyurtma</h2>  <form id="orderForm">
+  </div>  <h2 id="form-title"> Buyurtma qoldirish </h2>  <form id="orderForm">
     <label id="label-name" for="name">Ismingiz:</label>
     <input type="text" id="name" required><label id="label-phone" for="phone">Telefon raqamingiz:</label>
 <input type="tel" id="phone" required>
@@ -118,22 +118,22 @@ button:hover {
   <option value="Farqi yo‘q">Farqi yo‘q</option>
 </select>
 
-<button type="submit">✅ Buyurtma yuborish</button>
+<button type="submit">✅ Buyurtmani yuborish</button>
 
   </form>  <p id="status"></p>
 </div><script>
   const translations = {
     uz: {
-      title: "Zudlik bilan buyurtma",
+      title: "Buyurtma qoldirish",
       name: "Ismingiz:",
       phone: "Telefon raqamingiz:",
       pest: "Qaysi hasharot bezovta qilmoqda?",
       location: "Qayerni dezinfeksiya qilish kerak?",
       time: "Qachon qulay?",
-      submit: "✅ Buyurtma yuborish"
+      submit: "✅ Buyurtmani yuborish"
     },
     ru: {
-      title: "Срочная заявка",
+      title: Отправить заявку",
       name: "Ваше имя:",
       phone: "Ваш номер телефона:",
       pest: "Какие насекомые вас беспокоят?",
