@@ -1,121 +1,184 @@
 <!DOCTYPE html><html lang="uz">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buyurtma berish - NODIR DEZINFEKTSIYA</title>
+  <meta charset="UTF-8">
+  <title>Buyurtma Formasi</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-      color: #333;
-    }
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-      color: #007b5e;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-    }
-    select, input, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      background: #28a745;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    button:hover {
-      background: #218838;
-    }
-    .hidden {
-      display: none;
-    }
-    .success {
-      text-align: center;
-      color: green;
-      font-weight: bold;
-      margin-top: 20px;
-    }
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fff);
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }.form-container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  color: #00796b;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  background-color: #00796b;
+  color: white;
+  margin-top: 20px;
+  border: none;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #004d40;
+}
+
+.lang-select {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.lang-select button {
+  margin-left: 10px;
+  padding: 6px 10px;
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.lang-select button.active {
+  background-color: #00796b;
+  color: white;
+}
+
+#status {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+  color: green;
+}
+
   </style>
 </head>
-<body>
-  <div class="container">
-    <h2>Buyurtma berish</h2><!-- 1-bosqich -->
-<div id="step1">
-  <label>Qaysi joy uchun xizmat chaqirmoqchisiz?</label>
-  <select id="location">
-    <option value="">Tanlang</option>
-    <option value="Uy">🏠 Uy</option>
-    <option value="Ofis">🏢 Ofis</option>
-    <option value="Ishxona">🏬 Ishxona</option>
-    <option value="Ombor">🏭 Ombor</option>
-    <option value="Zavod">🏗 Zavod</option>
-    <option value="Daraxtzor">🌳 Daraxtzor / Bog‘</option>
-  </select>
-  <button onclick="goToStep2()">Davom etish</button>
-</div>
+<body><div class="form-container">
+  <div class="lang-select">
+    <button onclick="setLang('uz')" class="active">O'zbekcha</button>
+    <button onclick="setLang('ru')">Русский</button>
+  </div>  <h2 id="form-title">Zudlik bilan buyurtma</h2>  <form id="orderForm">
+    <label id="label-name" for="name">Ismingiz:</label>
+    <input type="text" id="name" required><label id="label-phone" for="phone">Telefon raqamingiz:</label>
+<input type="tel" id="phone" required>
 
-<!-- 2-bosqich -->
-<div id="step2" class="hidden">
-  <label>📱 Telefon raqamingiz:</label>
-  <input type="tel" id="phone" placeholder="+998 93 562 16 20" />
+<label id="label-pest" for="pest">Qaysi hasharot bezovta qilmoqda?</label>
+<select id="pest" required>
+  <option value="">-- Tanlang --</option>
+  <option value="Tarakanlar">Tarakanlar</option>
+  <option value="Kloplar">Kloplar</option>
+  <option value="Chumolilar">Chumolilar</option>
+  <option value="Chivinlar">Chivinlar</option>
+  <option value="Sichqonlar">Sichqonlar</option>
+  <option value="Boshqa">Boshqa</option>
+</select>
 
-  <label>📝 Qo‘shimcha izoh (ixtiyoriy):</label>
-  <textarea id="comment" rows="3" placeholder="Masalan: katta ombor, it bor va h.k."></textarea>
+<label id="label-location" for="location">Qayerni dezinfeksiya qilish kerak?</label>
+<select id="location" required>
+  <option value="">-- Tanlang --</option>
+  <option value="Kvartira">Kvartira</option>
+  <option value="Uy">Uy</option>
+  <option value="Ofis">Ofis</option>
+  <option value="Ombor">Ombor</option>
+  <option value="Zavod">Zavod</option>
+  <option value="Boshqa">Boshqa</option>
+</select>
 
-  <button onclick="sendOrder()">Bog‘lanish</button>
-</div>
+<label id="label-time" for="time">Qachon qulay?</label>
+<select id="time" required>
+  <option value="">-- Tanlang --</option>
+  <option value="Bugun">Bugun</option>
+  <option value="Ertaga">Ertaga</option>
+  <option value="Farqi yo‘q">Farqi yo‘q</option>
+</select>
 
-<!-- Natija -->
-<div id="result" class="hidden success">
-  ✅ Buyurtmangiz qabul qilindi. Tez orada siz bilan bog‘lanamiz.
-</div>
+<button type="submit">✅ Buyurtma yuborish</button>
 
-  </div>  <script>
-    function goToStep2() {
-      const location = document.getElementById('location').value;
-      if (!location) {
-        alert("Iltimos, joyni tanlang.");
-        return;
-      }
-      document.getElementById('step1').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
+  </form>  <p id="status"></p>
+</div><script>
+  const translations = {
+    uz: {
+      title: "Zudlik bilan buyurtma",
+      name: "Ismingiz:",
+      phone: "Telefon raqamingiz:",
+      pest: "Qaysi hasharot bezovta qilmoqda?",
+      location: "Qayerni dezinfeksiya qilish kerak?",
+      time: "Qachon qulay?",
+      submit: "✅ Buyurtma yuborish"
+    },
+    ru: {
+      title: "Срочная заявка",
+      name: "Ваше имя:",
+      phone: "Ваш номер телефона:",
+      pest: "Какие насекомые вас беспокоят?",
+      location: "Что нужно обработать?",
+      time: "Когда удобно?",
+      submit: "✅ Отправить заявку"
     }
+  };
 
-    function sendOrder() {
-      const location = document.getElementById('location').value;
-      const phone = document.getElementById('phone').value;
-      const comment = document.getElementById('comment').value;
+  function setLang(lang) {
+    const t = translations[lang];
+    document.getElementById("form-title").innerText = t.title;
+    document.getElementById("label-name").innerText = t.name;
+    document.getElementById("label-phone").innerText = t.phone;
+    document.getElementById("label-pest").innerText = t.pest;
+    document.getElementById("label-location").innerText = t.location;
+    document.getElementById("label-time").innerText = t.time;
+    document.querySelector("button[type='submit']").innerText = t.submit;
 
-      if (!phone) {
-        alert("Iltimos, telefon raqamingizni kiriting.");
-        return;
-      }
+    document.querySelectorAll('.lang-select button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.lang-select button[onclick="setLang('${lang}')"]`).classList.add('active');
+  }
 
-      const message = `📥 Yangi buyurtma:\n📍 Joy: ${location}\n📞 Tel: ${phone}\n📝 Izoh: ${comment}`;
+  const TOKEN = '8264569801:AAFHX7tVM9RVm0RVOL_TgwZ5h_OGszpIiGY';
+  const CHAT_ID = '@Saidov0102';
 
-      // Telegram orqali yuborish uchun URL (siz sozlashingiz mumkin)
-      const telegramURL = `https://t.me/Saidov0102?text=${encodeURIComponent(message)}`;
-      window.open(telegramURL, '_blank');
+  document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('result').classList.remove('hidden');
-    }
-  </script></body>
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const pest = document.getElementById('pest').value;
+    const location = document.getElementById('location').value;
+    const time = document.getElementById('time').value;
+
+    const message = `🆕 <b>Yangi buyurtma!</b>%0A%0A👤 Ismi: ${name}%0A📞 Tel: ${phone}%0A🐛 Muammo: ${pest}%0A🏠 Joy: ${location}%0A🕒 Qachon: ${time}`;
+
+    fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${message}&parse_mode=HTML`)
+      .then(res => {
+        document.getElementById('status').textContent = '✅ Buyurtma yuborildi!';
+        document.getElementById('orderForm').reset();
+      })
+      .catch(err => {
+        document.getElementById('status').textContent = '❌ Xatolik yuz berdi.';
+      });
+  });
+</script></body>
 </html>
