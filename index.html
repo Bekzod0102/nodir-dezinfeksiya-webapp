@@ -1,39 +1,121 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <title>Nodir Dezinfeksiya</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buyurtma berish - NODIR DEZINFEKTSIYA</title>
   <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 30px;
-      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      color: #333;
     }
     .container {
-      background-color: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 400px;
+      max-width: 500px;
       margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #007b5e;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    select, input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
     button {
-      background-color: #1d9bf0;
+      background: #28a745;
       color: white;
-      padding: 10px 20px;
-      font-size: 16px;
       border: none;
-      border-radius: 10px;
       cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .hidden {
+      display: none;
+    }
+    .success {
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>NODIR DEZINFEKSIYA</h1>
-    <p>Telegram орқали дезинфекция хизматларига буюртма беринг.</p>
-    <button onclick="alert('Buyurtma yuborildi!')">Buyurtma berish</button>
-  </div>
-</body>
+    <h2>Buyurtma berish</h2><!-- 1-bosqich -->
+<div id="step1">
+  <label>Qaysi joy uchun xizmat chaqirmoqchisiz?</label>
+  <select id="location">
+    <option value="">Tanlang</option>
+    <option value="Uy">🏠 Uy</option>
+    <option value="Ofis">🏢 Ofis</option>
+    <option value="Ishxona">🏬 Ishxona</option>
+    <option value="Ombor">🏭 Ombor</option>
+    <option value="Zavod">🏗 Zavod</option>
+    <option value="Daraxtzor">🌳 Daraxtzor / Bog‘</option>
+  </select>
+  <button onclick="goToStep2()">Davom etish</button>
+</div>
+
+<!-- 2-bosqich -->
+<div id="step2" class="hidden">
+  <label>📱 Telefon raqamingiz:</label>
+  <input type="tel" id="phone" placeholder="+998 93 562 16 20" />
+
+  <label>📝 Qo‘shimcha izoh (ixtiyoriy):</label>
+  <textarea id="comment" rows="3" placeholder="Masalan: katta ombor, it bor va h.k."></textarea>
+
+  <button onclick="sendOrder()">Bog‘lanish</button>
+</div>
+
+<!-- Natija -->
+<div id="result" class="hidden success">
+  ✅ Buyurtmangiz qabul qilindi. Tez orada siz bilan bog‘lanamiz.
+</div>
+
+  </div>  <script>
+    function goToStep2() {
+      const location = document.getElementById('location').value;
+      if (!location) {
+        alert("Iltimos, joyni tanlang.");
+        return;
+      }
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.remove('hidden');
+    }
+
+    function sendOrder() {
+      const location = document.getElementById('location').value;
+      const phone = document.getElementById('phone').value;
+      const comment = document.getElementById('comment').value;
+
+      if (!phone) {
+        alert("Iltimos, telefon raqamingizni kiriting.");
+        return;
+      }
+
+      const message = `📥 Yangi buyurtma:\n📍 Joy: ${location}\n📞 Tel: ${phone}\n📝 Izoh: ${comment}`;
+
+      // Telegram orqali yuborish uchun URL (siz sozlashingiz mumkin)
+      const telegramURL = `https://t.me/Saidov0102?text=${encodeURIComponent(message)}`;
+      window.open(telegramURL, '_blank');
+
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('result').classList.remove('hidden');
+    }
+  </script></body>
 </html>
